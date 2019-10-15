@@ -1,12 +1,19 @@
 {
   "name": "myplugin-vue",
-  "version": "0.1.0",
-  "private": true,
+  "version": "0.1.2",
+  "main": "lib/myplugin-vue.umd.min.js",
+  "private": false,
   "scripts": {
     "dev": "vue-cli-service serve",
     "build": "vue-cli-service build --no-clean",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "lib": "vue-cli-service build --target lib --name myplugin-vue --dest lib packages/index.js"
   },
+  "files": [
+    "lib",
+    "packages"
+  ],
+  "style": "lib/myplugin-vue.css",
   "dependencies": {
     "core-js": "^2.6.5",
     "vue": "^2.6.10",

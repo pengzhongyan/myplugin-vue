@@ -7,18 +7,29 @@ module.exports = {
   publicPath: "./",
   outputDir: "./dist",
   chainWebpack: config => {
+    // 另外也可以新增一个 ~ 指向 packages
     config.resolve.alias.set("@views", resolve("src/views"));
     config.resolve.alias.set("@pages", resolve("src/pages"));
     config.resolve.alias.set("@filters", resolve("src/filters"));
-    config.resolve.alias.set("@scripts", resolve("scripts/api"));
     config.resolve.alias.set("@store", resolve("src/store"));
     config.resolve.alias.set("@mixins", resolve("src/mixins"));
     config.resolve.alias.set("@utils", resolve("src/utils"));
     config.resolve.alias.set("@stylus", resolve("src/stylus"));
     config.resolve.alias.set("@components", resolve("src/components"));
-    config.resolve.alias.set("@data", resolve("src/data"));
     config.resolve.alias.set("@assets", resolve("src/assets"));
-    config.resolve.alias.set("@api", resolve("src/api")); // 生成的接口
+    config.resolve.alias.set("~", path.resolve("packages"));
+
+    // 把 packages，因为新增的文件默认是不被 webpack 处理的
+    config.module
+      .rule("js")
+      .include.add(/packages/)
+      .end()
+      .use("babel")
+      .loader("babel-loader")
+      .tap(options => {
+        // 修改它的选项...
+        return options;
+      });
   },
   css: {
     loaderOptions: {
