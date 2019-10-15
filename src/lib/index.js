@@ -21,3 +21,5 @@ export default {
   install, //导出的对象必须具备一个install方法
   ...components
 };
+
+module.exports = require("./lib");
