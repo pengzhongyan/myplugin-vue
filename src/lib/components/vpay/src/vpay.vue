@@ -216,6 +216,8 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+@import '~@stylus/global'
+
 .vpay {
   width: 100%
   max-width: 400px
