@@ -12,6 +12,27 @@
         @forget="forget"
         @close="close"
       ></vpay>
+      <!--全屏 -->
+      <div class="screen mt-10">
+        <div class="mr-5">操作全屏</div>
+        <fullscreen></fullscreen>
+      </div>
+      <!--删除 -->
+      <div class="delebtn mt-10">
+        <div @click="showDeleModal">删除</div>
+      </div>
+      <modal
+        @on-ok="deleteSure"
+        v-model="deleteModel"
+        title="确认删除"
+        ok-text="删除"
+        ok-type="error"
+        @on-cancel="deleteModel=false"
+        simple
+        type="warning"
+      >
+        <span class="ml-10">您确认删除这个管理员吗？</span>
+      </modal>
     </div>
   </div>
 </template>
@@ -22,6 +43,7 @@ export default {
   data() {
     return {
       show: false,
+      deleteModel: false,
       initPassword: "111111",
       title: "请输入支付密码"
     };
@@ -61,6 +83,12 @@ export default {
      */
     close() {
       console.log("关闭");
+    },
+    showDeleModal() {
+      this.deleteModel = true;
+    },
+    deleteSure() {
+      console.log("点击删除");
     }
   }
 };
@@ -87,6 +115,21 @@ export default {
     background: red
     color: #fff
     cursor: pointer
+  }
+  .delebtn {
+    width: 20%
+    height: 30px
+    line-height: 30px
+    border-radius: 10px
+    margin: 0 auto
+    background: red
+    color: #fff
+    cursor: pointer
+  }
+  .screen {
+    display: flex
+    align-items: center
+    justify-content: center
   }
 }
 </style>

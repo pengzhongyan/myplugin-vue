@@ -3,10 +3,13 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 import vpay from "../packages";
+import ViewUI from "view-design";
+import "view-design/dist/styles/iview.css";
 
 Vue.config.productionTip = false;
 // 使用插件
 Vue.use(vpay);
+Vue.use(ViewUI);
 
 new Vue({
   router,
