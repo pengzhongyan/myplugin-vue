@@ -2,11 +2,12 @@
 import vpay from "./components/vpay";
 import fullscreen from "./components/fullscreen";
 import modal from "./components/modal";
+import uploadavatar from "./components/uploadavatar";
 
 import importMethod from "./utils";
 
 //以数组结构保存，便于遍历
-const components = [vpay, fullscreen, modal];
+const components = [vpay, fullscreen, modal, uploadavatar];
 
 const install = Vue => {
   if (install.installed) return; //定义的install()

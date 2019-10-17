@@ -33,6 +33,14 @@
       >
         <span class="ml-10">您确认删除这个管理员吗？</span>
       </modal>
+      <div class="img-box mt-20">
+        <Avatar :src="cropImg" size="large" />
+        <!--更换头像 -->
+        <div class="spin-loading active-img" @click="uploadImg">
+          <Icon type="md-contact" />更换头像
+        </div>
+      </div>
+      <uploadavatar ref="avatar"></uploadavatar>
     </div>
   </div>
 </template>
@@ -44,11 +52,36 @@ export default {
     return {
       show: false,
       deleteModel: false,
+      avatarModal: false,
       initPassword: "111111",
       title: "请输入支付密码"
     };
   },
+  computed: {
+    cropImg() {
+      return require("../assets/avatar-icon.jpg");
+    }
+  },
   methods: {
+    uploadImg() {
+      document.querySelector("#imgReader").click();
+      this.$refs.avatar.openBox();
+    },
+    loadingImg(eve) {
+      //读取上传文件
+      let reader = new FileReader();
+      if (event.target.files[0]) {
+        //readAsDataURL方法可以将File对象转化为data:URL格式的字符串（base64编码）
+        reader.readAsDataURL(eve.target.files[0]);
+        reader.onload = e => {
+          let dataURL = reader.result;
+          //将img的src改为刚上传的文件的转换格式
+          document.querySelector("#cropImg").src = dataURL;
+          const image = document.getElementById("cropImg");
+        };
+      }
+    },
+
     showPay() {
       this.show = true;
     },
@@ -130,6 +163,43 @@ export default {
     display: flex
     align-items: center
     justify-content: center
+  }
+  .img-box {
+    box-sizing: border-box
+    position: relative
+    display: flex
+    align-items: center
+    justify-content: center
+    width: 75px
+    height: 75px
+    line-height: 75px
+    border-radius: 50%
+    &:hover {
+      border: 1px solid #2D8CF0
+      cursor: pointer
+      .active-img {
+        display: block
+      }
+    }
+    .active-img {
+      display: none
+      position: absolute
+      left: 0
+      top: 0
+      width: 100%
+      height: 100%
+      background: #E9E9E9
+      border-radius: 50%
+      overflow: hidden
+      text-align: center
+      font-size: 12px
+    }
+  }
+  >>>.ivu-avatar-large {
+    width: 70px
+    height: 70px
+    line-height: 70px
+    border-radius: 35px
   }
 }
 </style>
